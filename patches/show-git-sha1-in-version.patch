@@ -1,0 +1,23 @@
+diff --git a/lisp/version.el b/lisp/version.el
+index ea6f1b4..2676b6c 100644
+--- a/lisp/version.el
++++ b/lisp/version.el
+@@ -62,7 +62,7 @@ Don't use this function in programs to choose actions according
+ to the system configuration; look at `system-configuration' instead."
+   (interactive "P")
+   (let ((version-string
+-         (format "GNU Emacs %s (build %s, %s%s%s%s)%s"
++         (format "GNU Emacs %s (build %s, %s%s%s%s%s)%s"
+                  emacs-version
+                  emacs-build-number
+ 		 system-configuration
+@@ -82,6 +82,9 @@ to the system configuration; look at `system-configuration' instead."
+ 		     (format ", %s scroll bars"
+ 			     (capitalize (symbol-name x-toolkit-scroll-bars)))
+ 		   "")
++                 (if (boundp 'emacs-version-git-commit)
++		     (format ", git sha1 %s" emacs-version-git-commit)
++		   "")
+ 		 (if emacs-build-time
+ 		     (format-time-string (concat
+ 					  (if (called-interactively-p
