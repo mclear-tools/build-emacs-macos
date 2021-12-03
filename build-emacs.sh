@@ -11,13 +11,6 @@ BUILD_DIR=/tmp/emacs-build
 SRC_DIR=emacs-git
 
 # ======================================================
-# Use Homebrew libxml
-# ======================================================
-
-# export LDFLAGS="-L/opt/homebrew/opt/libxml2/lib"
-# export CPPFLAGS="-I/opt/homebrew/opt/libxml2/include"
-
-# ======================================================
 # Start with a clean build
 # ======================================================
 
@@ -86,12 +79,6 @@ echo "
 # ======================================================
 "
 ./autogen.sh
-
-# ======================================================
-# Use Homebrew libxml pkgconfig
-# ======================================================
-
-# export PKG_CONFIG_PATH="/opt/homebrew/opt/libxml2/lib/pkgconfig"
 
 for f in $STRINGS; do
     sed -e "s/@version@/@version@ $VERS/" -i '' $f
