@@ -29,18 +29,21 @@ there. Hopefully this will be of help to those people who, like myself, want
 more control over how emacs works but lack much of the programming knowledge
 that is assumed for building it.
 
-Note that this build process currently works well for me using a 2021 M1
-Macbook Pro with Montery 12.0.1. It should build either the latest emacs
+*Note* that this build process currently works well for me using a 2021 M1
+Macbook Pro with Monterey 12.0.1. It should build either the latest emacs
 release or the master branch just fine. I have not tested this on other
-machines or for other kinds of build.
+machines or for other kinds of build. Builds are specific to the machine on
+which they are created, and not guaranteed to work without breakage on other
+machines. 
 
 ** Emacs & Git
-The first thing one needs to do in building emacs is clone the emacs git
-repository. You can do this either by cloning from the main repo: =git clone
-https://git.savannah.gnu.org/git/emacs.git= or from the github mirror: =git
-clone https://github.com/emacs-mirror/emacs.git=. It doesn't really matter
-which one you choose. Clone it to somewhere convenient on your system (I clone
-it to a subdirectory of this =build-emacs= dir). 
+The first thing one needs to do in building emacs from the source files is
+clone the emacs git repository. You can do this either by cloning from the
+main repo: =git clone https://git.savannah.gnu.org/git/emacs.git= or from
+the github mirror: =git clone https://github.com/emacs-mirror/emacs.git=. It
+doesn't really matter which one you choose. Clone it to somewhere
+convenient on your system (I clone it to a subdirectory of this
+=build-emacs= dir).
 
 ** Config Options
 
@@ -61,12 +64,13 @@ The options I use to build emacs currently are:
     --with-xwidgets \
 #+end_src
 
-
 ** Patches
 
 These are various modification to emacs during the build process. You can
 read more about the =patch= command by running =man patch= on the command line
-or looking at some of the examples[[https://www.thegeekstuff.com/2014/12/patch-command-examples/][ here]].
+or looking at some of the examples[[https://www.thegeekstuff.com/2014/12/patch-command-examples/][ here]]. Currently the build script uses all
+patches. If you don't want to use one of the patches below, remove it from the
+=patches= directory or modify the build script. 
 
 - Git version: allows for showing git version in =emacs-version= command
 - Lion fullscreen: allow native fullscreen (especially useful for the new
@@ -80,18 +84,27 @@ or looking at some of the examples[[https://www.thegeekstuff.com/2014/12/patch-c
 Please note that large portions of the build script are derived from, or
 inspired by:
 
-- https://github.com/renard/emacs-build-macosx
-- https://github.com/d12frosted/homebrew-emacs-plus
-- https://github.com/jimeh/build-emacs-for-macos
+- https://github.com/renard/emacs-build-macosx (general form)
+- https://github.com/d12frosted/homebrew-emacs-plus (patches)
+- https://github.com/jimeh/build-emacs-for-macos (instructions on build and config)
 
 By default the build script builds off of the master branch but you can
 also specify the version you want to build from any commit within recent
 Emacs history (i.e. Emacs >= 24).
 
+To *use* the build script simply:
+
+1. Clone this repo.
+2. Make sure that you have cloned the emacs source.
+3. Set the variables in the build script appropriately.
+4. Make the script executable using =chmod u+x build-emacs.sh= and have the
+   script in your path.
+5. Run =./build-emacs.sh= 
+
 ** Build-logs
+
 Each build with =build-emacs.sh= generates a subdirectory in =build-logs= with
 a set of build logs organized by date and commit.
-
 
 ** Materials
 
