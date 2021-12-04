@@ -115,12 +115,10 @@ echo "
 # For more info see config-options.txt
 
 ./configure \
-    --with-dbus \
     --with-ns \
     --with-native-compilation \
     --with-xwidgets \
     --with-mailutils \
-    --with-sound=yes \
     --with-json \
 
 echo "
