@@ -4,7 +4,15 @@
 ## Patches from https://github.com/d12frosted/homebrew-emacs-plus
 ## See also https://github.com/jimeh/build-emacs-for-macos
 
+# ======================================================
+# Exit on non-zero status
+# See https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
+# ======================================================
 set -e
+
+# ======================================================
+# Set Variables
+# ======================================================
 
 ROOT_DIR="`pwd`"
 BUILD_DIR=/tmp/emacs-build
@@ -45,7 +53,10 @@ echo "
 # ======================================================
 "
 
-cp ${ROOT_DIR}/site-lisp/${GIT_VERSION} ${BUILD_DIR}/
+# This records the Git SHA to an elisp file and
+# moves it to your preferred elisp setup dir
+
+cp ${ROOT_DIR}/materials/${GIT_VERSION} ${BUILD_DIR}/
 sed -e "s/@@GIT_COMMIT@@/$REV/" -i '' ${BUILD_DIR}/${GIT_VERSION}
 mv -f ${BUILD_DIR}/${GIT_VERSION} ${SETUP}/${GIT_VERSION}
 
@@ -66,6 +77,8 @@ done
 # Info settings
 # ======================================================
 
+# Here we set infofiles and variables for versioning
+
 STRINGS="
   nextstep/templates/Emacs.desktop.in
   nextstep/templates/Info-gnustep.plist.in
@@ -83,6 +96,9 @@ echo "
 # Autogen/copy_autogen
 # ======================================================
 "
+
+# Generate config files & include versioning info
+
 ./autogen.sh
 
 for f in $STRINGS; do
@@ -94,6 +110,9 @@ echo "
 # Configure emacs
 # ======================================================
 "
+
+# Here we set config options for emacs
+# For more info see config-options.txt
 
 ./configure \
     --with-dbus \
@@ -110,7 +129,7 @@ echo "
 # ======================================================
 "
 
-## Check number of processors
+## Check number of processors & use as many as we can!
 NCPU=$(getconf _NPROCESSORS_ONLN)
 
 ## Send output to log file using tee
@@ -124,10 +143,12 @@ echo "
 # Delete old app & Move new app
 # ======================================================
 "
-
-pkill -i emacs # close any emacs sessions
-trash /Applications/Emacs.app # trash old emacs
-mv ${BUILD_DIR}/nextstep/Emacs.app /Applications # move build to applications folder
+# close any emacs sessions
+pkill -i emacs
+# trash old emacs
+trash /Applications/Emacs.app
+# move build to applications folder
+mv ${BUILD_DIR}/nextstep/Emacs.app /Applications
 
 echo "DONE!"
 
@@ -137,8 +158,10 @@ echo "
 # ======================================================
 "
 
-cp ~/Pictures/emacs-icons/emacs-big-sur.icns /Applications/Emacs.app/Contents/Resources/Emacs.icns
-cp ~/Pictures/emacs-icons/info.plist /Applications/Emacs.app/Contents/Info.plist
+# Copy new icon to emacs (currently using a big sur icon)
+# See https://github.com/d12frosted/homebrew-emacs-plus/issues/419
+cp ${ROOT_DIR}/materials/emacs-big-sur.icns /Applications/Emacs.app/Contents/Resources/Emacs.icns
+cp ${ROOT_DIR}/materials/info.plist /Applications/Emacs.app/Contents/Info.plist
 
 echo "DONE!"
 
@@ -158,11 +181,13 @@ echo "
 # ======================================================
 "
 
+# Make a directory for the build's log files and move them there
 mkdir ${ROOT_DIR}/build-logs/${DESCR}
-cp ${BUILD_DIR}/config.log ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-config.log
-cp ${BUILD_DIR}/build-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-build-log.txt
-cp ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-bootstrap-log.txt
+mv ${BUILD_DIR}/config.log ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-config.log
+mv ${BUILD_DIR}/build-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-build-log.txt
+mv ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-bootstrap-log.txt
 
+# Delete build dir
 
 rm -rf ${BUILD_DIR}
 
