@@ -165,16 +165,6 @@ echo "DONE!"
 
 echo "
 # ======================================================
-# Open new emacs
-# ======================================================
-"
-
-open /Applications/Emacs.app
-
-echo "DONE!"
-
-echo "
-# ======================================================
 # Cleanup
 # ======================================================
 "
@@ -188,5 +178,15 @@ mv ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-boots
 # Delete build dir
 
 rm -rf ${BUILD_DIR}
+
+echo "DONE!"
+
+echo "
+# ======================================================
+# Open new emacs
+# ======================================================
+"
+
+open /Applications/Emacs.app
 
 echo "DONE!"
