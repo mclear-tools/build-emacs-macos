@@ -9,6 +9,8 @@ set -e
 ROOT_DIR="`pwd`"
 BUILD_DIR=/tmp/emacs-build
 SRC_DIR=emacs-git
+GIT_VERSION=setup-emacs-git-version.el
+SETUP=~/.emacs.d/setup-config
 
 # ======================================================
 # Start with a clean build
@@ -39,12 +41,15 @@ cd ${BUILD_DIR}
 
 echo "
 # ======================================================
-# Sync site Lisp & Git sha
+# Record Git SHA
 # ======================================================
 "
-rsync -aE ${ROOT_DIR}/site-lisp lisp
 
-sed -e "s/@@GIT_COMMIT@@/$REV/" -i '' lisp/site-lisp/early-site-start.el
+cp ${ROOT_DIR}/site-lisp/${GIT_VERSION} ${BUILD_DIR}/
+sed -e "s/@@GIT_COMMIT@@/$REV/" -i '' ${BUILD_DIR}/${GIT_VERSION}
+mv -f ${BUILD_DIR}/${GIT_VERSION} ${SETUP}/${GIT_VERSION}
+
+echo "DONE!"
 
 echo "
 # ======================================================
@@ -91,12 +96,13 @@ echo "
 "
 
 ./configure \
+    --with-dbus \
     --with-ns \
-    --without-dbus \
     --with-native-compilation \
     --with-xwidgets \
     --with-mailutils \
-
+    --with-sound=yes \
+    --with-json \
 
 echo "
 # ======================================================
@@ -104,10 +110,26 @@ echo "
 # ======================================================
 "
 
-make
-make install
+## Check number of processors
+NCPU=$(getconf _NPROCESSORS_ONLN)
+
+## Send output to log file using tee
+## See https://stackoverflow.com/a/60432203/6277148
+make bootstrap -j$NCPU | tee bootstrap-log.txt || exit 1 && make install -j$NCPU | tee build-log.txt
+
+echo "DONE!"
+
+echo "
+# ======================================================
+# Delete old app & Move new app
+# ======================================================
+"
+
+pkill -i emacs # close any emacs sessions
 trash /Applications/Emacs.app # trash old emacs
-mv ${BUILD_DIR}/nextstep/Emacs.app /Applications # move to applications folder
+mv ${BUILD_DIR}/nextstep/Emacs.app /Applications # move build to applications folder
+
+echo "DONE!"
 
 echo "
 # ======================================================
@@ -116,7 +138,9 @@ echo "
 "
 
 cp ~/Pictures/emacs-icons/emacs-big-sur.icns /Applications/Emacs.app/Contents/Resources/Emacs.icns
-# cp ~/Pictures/emacs-icons/info.plist /Applications/Emacs.app/Contents/Info.plist
+cp ~/Pictures/emacs-icons/info.plist /Applications/Emacs.app/Contents/Info.plist
+
+echo "DONE!"
 
 echo "
 # ======================================================
@@ -126,11 +150,20 @@ echo "
 
 open /Applications/Emacs.app
 
+echo "DONE!"
+
 echo "
 # ======================================================
 # Cleanup
 # ======================================================
 "
 
+mkdir ${ROOT_DIR}/build-logs/${DESCR}
+cp ${BUILD_DIR}/config.log ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-config.log
+cp ${BUILD_DIR}/build-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-build-log.txt
+cp ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-bootstrap-log.txt
+
+
 rm -rf ${BUILD_DIR}
-rm -rf tmp.dmg
+
+echo "DONE!"
