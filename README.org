@@ -16,7 +16,23 @@ for example:
 - https://github.com/renard/emacs-build-macosx
 
 
-So why another build script? Well, in keeping with the way I use emacs, I wanted to be able to build it in the way that I preferred, using all the options that I thought important. Plus I also wanted to understand more about the build process. Since I'm not a programmer, I tried to write a [[https://en.wikipedia.org/wiki/Shell_script][shell script]] that would be as accessible to other non-programmers as possible. It was this latter that I found particularly lacking in my search on the internet for instructions about how to build emacs using any but the most basic of settings. So below you'll find a discussion of the various contents of this repo, what they do (to the best of my very limited knowledge) and why they are there. Hopefully this will be of help to those people who, like myself, want more control over how emacs works but lack much of the programming knowledge that is assumed for building it.
+So why another build script? Well, in keeping with the way I use emacs, I
+wanted to be able to build it in the way that I preferred, using all the
+options that I thought important. Plus I also wanted to understand more about
+the build process. Since I'm not a programmer, I tried to write a [[https://en.wikipedia.org/wiki/Shell_script][shell script]]
+that would be as accessible to other non-programmers as possible. It was this
+latter that I found particularly lacking in my search on the internet for
+instructions about how to build emacs using any but the most basic of
+settings. So below you'll find a discussion of the various contents of this
+repo, what they do (to the best of my very limited knowledge) and why they are
+there. Hopefully this will be of help to those people who, like myself, want
+more control over how emacs works but lack much of the programming knowledge
+that is assumed for building it.
+
+Note that this build process currently works well for me using a 2021 M1
+Macbook Pro with Montery 12.0.1. It should build either the latest emacs
+release or the master branch just fine. I have not tested this on other
+machines or for other kinds of build.
 
 ** Emacs & Git
 The first thing one needs to do in building emacs is clone the emacs git
@@ -67,6 +83,10 @@ inspired by:
 - https://github.com/renard/emacs-build-macosx
 - https://github.com/d12frosted/homebrew-emacs-plus
 - https://github.com/jimeh/build-emacs-for-macos
+
+By default the build script builds off of the master branch but you can
+also specify the version you want to build from any commit within recent
+Emacs history (i.e. Emacs >= 24).
 
 ** Build-logs
 Each build with =build-emacs.sh= generates a subdirectory in =build-logs= with
