@@ -1,0 +1,336 @@
+`configure' configures GNU Emacs 29.0.50 to adapt to many kinds of systems.
+
+Usage: ./configure [OPTION]... [VAR=VALUE]...
+
+To assign environment variables (e.g., CC, CFLAGS...), specify them as
+VAR=VALUE.  See below for descriptions of some of the useful variables.
+
+Defaults for the options are specified in brackets.
+
+Configuration:
+  -h, --help              display this help and exit
+      --help=short        display options specific to this package
+      --help=recursive    display the short help of all the included packages
+  -V, --version           display version information and exit
+  -q, --quiet, --silent   do not print `checking ...' messages
+      --cache-file=FILE   cache test results in FILE [disabled]
+  -C, --config-cache      alias for `--cache-file=config.cache'
+  -n, --no-create         do not create output files
+      --srcdir=DIR        find the sources in DIR [configure dir or `..']
+
+Installation directories:
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+                          [/usr/local]
+  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
+                          [PREFIX]
+
+By default, `make install' will install all the files in
+`/usr/local/bin', `/usr/local/lib' etc.  You can specify
+an installation prefix other than `/usr/local' using `--prefix',
+for instance `--prefix=$HOME'.
+
+For better control, use the options below.
+
+Fine tuning of the installation directories:
+  --bindir=DIR            user executables [EPREFIX/bin]
+  --sbindir=DIR           system admin executables [EPREFIX/sbin]
+  --libexecdir=DIR        program executables [EPREFIX/libexec]
+  --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
+  --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
+  --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
+  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
+  --libdir=DIR            object code libraries [EPREFIX/lib]
+  --includedir=DIR        C header files [PREFIX/include]
+  --oldincludedir=DIR     C header files for non-gcc [/usr/include]
+  --datarootdir=DIR       read-only arch.-independent data root [PREFIX/share]
+  --datadir=DIR           read-only architecture-independent data [DATAROOTDIR]
+  --infodir=DIR           info documentation [DATAROOTDIR/info]
+  --localedir=DIR         locale-dependent data [DATAROOTDIR/locale]
+  --mandir=DIR            man documentation [DATAROOTDIR/man]
+  --docdir=DIR            documentation root [DATAROOTDIR/doc/emacs]
+  --htmldir=DIR           html documentation [DOCDIR]
+  --dvidir=DIR            dvi documentation [DOCDIR]
+  --pdfdir=DIR            pdf documentation [DOCDIR]
+  --psdir=DIR             ps documentation [DOCDIR]
+
+Program names:
+  --program-prefix=PREFIX            prepend PREFIX to installed program names
+  --program-suffix=SUFFIX            append SUFFIX to installed program names
+  --program-transform-name=PROGRAM   run sed PROGRAM on installed program names
+
+X features:
+  --x-includes=DIR    X include files are in DIR
+  --x-libraries=DIR   X library files are in DIR
+
+System types:
+  --build=BUILD     configure for building on BUILD [guessed]
+  --host=HOST       cross-compile to build programs to run on HOST [BUILD]
+
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --disable-ns-self-contained
+                          disable self contained build under NeXTstep
+  --enable-locallisppath=PATH
+                          directories Emacs should search for lisp files
+                          specific to this site
+  --enable-checking[=LIST]
+                          enable expensive checks. With LIST, enable only
+                          specific categories of checks. Categories are:
+                          all,yes,no. Flags are: stringbytes, stringoverrun,
+                          stringfreelist, structs, glyphs
+  --enable-profiling      build emacs with low-level, gprof profiling support.
+                          Mainly useful for debugging Emacs itself. May not
+                          work on all platforms. Stops profiler.el working.
+  --enable-autodepend     automatically generate dependencies to .h-files.
+                          Requires gcc, enabled if found.
+  --enable-gtk-deprecation-warnings
+                          Show Gtk+/Gdk deprecation warnings for Gtk+ >= 3.0
+  --disable-build-details Make the build more deterministic by omitting host
+                          names, time stamps, etc. from the output.
+  --disable-largefile     omit support for large files
+  --disable-year2038      omit support for timestamps past the year 2038
+  --enable-gcc-warnings[=TYPE]
+                          control generation of GCC warnings. The TYPE 'yes'
+                          means to fail if any warnings are issued;
+                          'warn-only' means issue warnings without failing
+                          (default for developer builds); 'no' means disable
+                          warnings (default for non-developer builds).
+  --enable-check-lisp-object-type
+                          Enable compile time checks for the Lisp_Object data
+                          type, which can catch some bugs during development.
+  --enable-link-time-optimization
+                          build with link-time optimization (experimental; see
+                          INSTALL)
+  --disable-silent-rules  verbose build output (undo: "make V=0")
+  --enable-cross-guesses={conservative|risky}
+                          specify policy for cross-compilation guesses
+  --disable-acl           do not support ACLs
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --without-all           omit almost all features and build small executable
+                          with minimal dependencies
+  --with-mailutils        rely on GNU Mailutils, so that the --without-pop
+                          through --with-mailhost options are irrelevant; this
+                          is the default if GNU Mailutils is installed
+  --with-pop              Support POP mail retrieval if Emacs movemail is used
+                          (not recommended, as Emacs movemail POP is
+                          insecure). This is the default only on native
+                          MS-Windows.
+  --with-kerberos         support Kerberos-authenticated POP
+  --with-kerberos5        support Kerberos version 5 authenticated POP
+  --with-hesiod           support Hesiod to get the POP server host
+  --with-mail-unlink      unlink, rather than empty, mail spool after reading
+  --with-mailhost=HOSTNAME
+                          string giving default POP mail host
+  --with-sound=VALUE      compile with sound support (VALUE one of: yes, alsa,
+                          oss, bsd-ossaudio, no; default yes). Only for
+                          GNU/Linux, FreeBSD, NetBSD, MinGW, Cygwin.
+  --with-pdumper=VALUE    enable pdumper support unconditionally ('yes', 'no',
+                          or 'auto': default 'auto')
+  --with-unexec=VALUE     enable unexec support unconditionally ('yes', 'no',
+                          or 'auto': default 'auto')
+  --with-dumping=VALUE    kind of dumping to use for initial Emacs build
+                          (VALUE one of: pdumper, unexec, none; default
+                          pdumper)
+  --with-x-toolkit=KIT    use an X toolkit (KIT one of: yes or gtk, gtk2,
+                          gtk3, lucid or athena, no)
+  --with-wide-int         prefer wide Emacs integers (typically 62-bit); on
+                          32-bit hosts, this allows buffer and string size up
+                          to 2GB, at the cost of 10% to 30% slowdown of Lisp
+                          interpreter and larger memory footprint
+  --without-xpm           don't compile with XPM image support
+  --without-jpeg          don't compile with JPEG image support
+  --without-tiff          don't compile with TIFF image support
+  --without-gif           don't compile with GIF image support
+  --without-png           don't compile with PNG image support
+  --without-rsvg          don't compile with SVG image support
+  --without-webp          don't compile with WebP image support
+  --without-lcms2         don't compile with Little CMS support
+  --without-libsystemd    don't compile with libsystemd support
+  --without-cairo         don't compile with Cairo drawing
+  --without-xml2          don't compile with XML parsing support
+  --with-imagemagick      compile with ImageMagick image support
+  --without-native-image-api
+                          don't use native image APIs (GDI+ on Windows)
+  --with-json             compile with native JSON support
+  --without-xft           don't use XFT for anti aliased fonts
+  --without-harfbuzz      don't use HarfBuzz for text shaping
+  --without-libotf        don't use libotf for OpenType font support
+  --without-m17n-flt      don't use m17n-flt for text shaping
+  --without-toolkit-scroll-bars
+                          don't use Xaw3d/GTK toolkit scroll bars
+  --without-xaw3d         don't use Xaw3d
+  --without-xim           at runtime, default X11 XIM to off
+  --without-xdbe          don't use X11 double buffering support
+  --with-ns               use Nextstep (macOS Cocoa or GNUstep) windowing
+                          system. On by default on macOS.
+  --with-w32              use native MS Windows GUI in a Cygwin build
+  --without-gpm           don't use -lgpm for mouse support on a GNU/Linux
+                          console
+  --without-dbus          don't compile with D-Bus support
+  --with-gconf            compile with Gconf support (Gsettings replaces this)
+  --without-gsettings     don't compile with GSettings support
+  --without-selinux       don't compile with SELinux support
+  --without-gnutls        don't use -lgnutls for SSL/TLS support
+  --without-zlib          don't compile with zlib decompression support
+  --without-modules       don't compile with dynamic modules support
+  --without-threads       don't compile with elisp threading support
+  --with-native-compilation
+                          compile with Emacs Lisp native compiler support
+  --with-cygwin32-native-compilation
+                          use native compilation on 32-bit Cygwin
+  --with-xinput2          use version 2 of the X Input Extension for input
+  --with-file-notification=LIB
+                          use a file notification library (LIB one of: yes,
+                          inotify, kqueue, gfile, w32, no)
+  --with-xwidgets         enable use of xwidgets in Emacs buffers (requires
+                          gtk3 or macOS Cocoa)
+  --with-be-app           enable use of Haiku's Application Kit as a window
+                          system
+  --with-be-cairo         enable use of cairo under Haiku's Application Kit
+  --without-compress-install
+                          don't compress some files (.el, .info, etc.) when
+                          installing. Equivalent to: make GZIP_PROG= install
+  --with-gameuser=USER_OR_GROUP
+                          user for shared game score files. An argument
+                          prefixed by ':' specifies a group instead.
+  --with-gnustep-conf=FILENAME
+                          name of GNUstep configuration file to use on systems
+                          where the command 'gnustep-config' does not work;
+                          default $GNUSTEP_CONFIG_FILE, or
+                          /etc/GNUstep/GNUstep.conf
+  --with-x                use the X Window System
+  --without-libgmp        do not use the GNU Multiple Precision (GMP) library;
+                          this is the default on systems lacking libgmp.
+  --without-included-regex
+                          don't compile regex; this is the default on systems
+                          with recent-enough versions of the GNU C Library
+                          (use with caution on other systems).
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  ALSA_CFLAGS C compiler flags for ALSA, overriding pkg-config
+  ALSA_LIBS   linker flags for ALSA, overriding pkg-config
+  XMKMF       Path to xmkmf, Makefile generator for X Window System
+  OBJC        Objective C compiler command
+  OBJCFLAGS   Objective C compiler flags
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  RSVG_CFLAGS C compiler flags for RSVG, overriding pkg-config
+  RSVG_LIBS   linker flags for RSVG, overriding pkg-config
+  WEBP_CFLAGS C compiler flags for WEBP, overriding pkg-config
+  WEBP_LIBS   linker flags for WEBP, overriding pkg-config
+  IMAGEMAGICK_CFLAGS
+              C compiler flags for IMAGEMAGICK, overriding pkg-config
+  IMAGEMAGICK_LIBS
+              linker flags for IMAGEMAGICK, overriding pkg-config
+  GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
+  GTK_LIBS    linker flags for GTK, overriding pkg-config
+  WEBKIT_CFLAGS
+              C compiler flags for WEBKIT, overriding pkg-config
+  WEBKIT_LIBS linker flags for WEBKIT, overriding pkg-config
+  DBUS_CFLAGS C compiler flags for DBUS, overriding pkg-config
+  DBUS_LIBS   linker flags for DBUS, overriding pkg-config
+  GSETTINGS_CFLAGS
+              C compiler flags for GSETTINGS, overriding pkg-config
+  GSETTINGS_LIBS
+              linker flags for GSETTINGS, overriding pkg-config
+  GCONF_CFLAGS
+              C compiler flags for GCONF, overriding pkg-config
+  GCONF_LIBS  linker flags for GCONF, overriding pkg-config
+  GOBJECT_CFLAGS
+              C compiler flags for GOBJECT, overriding pkg-config
+  GOBJECT_LIBS
+              linker flags for GOBJECT, overriding pkg-config
+  LIBGNUTLS_CFLAGS
+              C compiler flags for LIBGNUTLS, overriding pkg-config
+  LIBGNUTLS_LIBS
+              linker flags for LIBGNUTLS, overriding pkg-config
+  LIBSYSTEMD_CFLAGS
+              C compiler flags for LIBSYSTEMD, overriding pkg-config
+  LIBSYSTEMD_LIBS
+              linker flags for LIBSYSTEMD, overriding pkg-config
+  JSON_CFLAGS C compiler flags for JSON, overriding pkg-config
+  JSON_LIBS   linker flags for JSON, overriding pkg-config
+  KQUEUE_CFLAGS
+              C compiler flags for KQUEUE, overriding pkg-config
+  KQUEUE_LIBS linker flags for KQUEUE, overriding pkg-config
+  GFILENOTIFY_CFLAGS
+              C compiler flags for GFILENOTIFY, overriding pkg-config
+  GFILENOTIFY_LIBS
+              linker flags for GFILENOTIFY, overriding pkg-config
+  CAIRO_CFLAGS
+              C compiler flags for CAIRO, overriding pkg-config
+  CAIRO_LIBS  linker flags for CAIRO, overriding pkg-config
+  FREETYPE_CFLAGS
+              C compiler flags for FREETYPE, overriding pkg-config
+  FREETYPE_LIBS
+              linker flags for FREETYPE, overriding pkg-config
+  FONTCONFIG_CFLAGS
+              C compiler flags for FONTCONFIG, overriding pkg-config
+  FONTCONFIG_LIBS
+              linker flags for FONTCONFIG, overriding pkg-config
+  XFT_CFLAGS  C compiler flags for XFT, overriding pkg-config
+  XFT_LIBS    linker flags for XFT, overriding pkg-config
+  LIBOTF_CFLAGS
+              C compiler flags for LIBOTF, overriding pkg-config
+  LIBOTF_LIBS linker flags for LIBOTF, overriding pkg-config
+  M17N_FLT_CFLAGS
+              C compiler flags for M17N_FLT, overriding pkg-config
+  M17N_FLT_LIBS
+              linker flags for M17N_FLT, overriding pkg-config
+  HARFBUZZ_CFLAGS
+              C compiler flags for HARFBUZZ, overriding pkg-config
+  HARFBUZZ_LIBS
+              linker flags for HARFBUZZ, overriding pkg-config
+  LCMS2_CFLAGS
+              C compiler flags for LCMS2, overriding pkg-config
+  LCMS2_LIBS  linker flags for LCMS2, overriding pkg-config
+  PNG_CFLAGS  C compiler flags for PNG, overriding pkg-config
+  PNG_LIBS    linker flags for PNG, overriding pkg-config
+  XRANDR_CFLAGS
+              C compiler flags for XRANDR, overriding pkg-config
+  XRANDR_LIBS linker flags for XRANDR, overriding pkg-config
+  XINERAMA_CFLAGS
+              C compiler flags for XINERAMA, overriding pkg-config
+  XINERAMA_LIBS
+              linker flags for XINERAMA, overriding pkg-config
+  XFIXES_CFLAGS
+              C compiler flags for XFIXES, overriding pkg-config
+  XFIXES_LIBS linker flags for XFIXES, overriding pkg-config
+  XINPUT_CFLAGS
+              C compiler flags for XINPUT, overriding pkg-config
+  XINPUT_LIBS linker flags for XINPUT, overriding pkg-config
+  LIBXML2_CFLAGS
+              C compiler flags for LIBXML2, overriding pkg-config
+  LIBXML2_LIBS
+              linker flags for LIBXML2, overriding pkg-config
+  LIBSECCOMP_CFLAGS
+              C compiler flags for LIBSECCOMP, overriding pkg-config
+  LIBSECCOMP_LIBS
+              linker flags for LIBSECCOMP, overriding pkg-config
+
+Use these variables to override the choices made by `configure' or to help
+it to find libraries and programs with nonstandard names/locations.
+
+Report bugs to <bug-gnu-emacs@gnu.org>.
+GNU Emacs home page: <https://www.gnu.org/software/emacs/>.
+General help using GNU software: <https://www.gnu.org/gethelp/>.
+
+1
