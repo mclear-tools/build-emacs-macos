@@ -21,6 +21,13 @@ GIT_VERSION=setup-emacs-git-version.el
 SETUP=~/.emacs.d/setup-config
 
 # ======================================================
+# Use Homebrew libxml
+# ======================================================
+
+export LDFLAGS="-L/opt/homebrew/opt/libxml2/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/libxml2/include"
+
+# ======================================================
 # Start with a clean build
 # ======================================================
 
@@ -37,6 +44,7 @@ if test -n "$1"; then
     commit="$1"
 else
     commit="origin/master"
+    git checkout master
     git pull
 fi
 
@@ -98,8 +106,29 @@ echo "
 "
 
 # Generate config files & include versioning info
-
 ./autogen.sh
+
+# ======================================================
+# Use Homebrew libxml pkgconfig
+# ======================================================
+
+export PKG_CONFIG_PATH="/opt/homebrew/opt/libxml2/lib/pkgconfig"
+
+# ======================================================
+# Set Compile Flags
+# ======================================================
+
+# Use Clang for slightly faster builds
+# See https://leeifrankjaw.github.io/articles/clang_vs_gcc_for_emacs.html
+# See https://alibabatech.medium.com/gcc-vs-clang-llvm-an-in-depth-comparison-of-c-c-compilers-899ede2be378
+
+CFLAGS="-g -O2"
+export CC=clang
+export OBJC=clang
+
+# ======================================================
+# Inscribe Version in Info files
+# ======================================================
 
 for f in $STRINGS; do
     sed -e "s/@version@/@version@ $VERS/" -i '' $f
@@ -120,6 +149,7 @@ echo "
     --with-xwidgets \
     --with-mailutils \
     --with-json \
+    --without-dbus \
 
 echo "
 # ======================================================

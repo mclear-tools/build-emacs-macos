@@ -45,6 +45,25 @@ doesn't really matter which one you choose. Clone it to somewhere
 convenient on your system (I clone it to a subdirectory of this
 =build-emacs= dir).
 
+** Build Requirements
+You'll need to install the following to build emacs. For convenience, you
+can use the install script that I've provided in the repo. From the
+emacs-build directory run =chmod u+x bemacs-requirements.sh= and then
+=./bemacs-requirements.sh= and you should be all set.
+
+- Xcode command line tools
+- [[https://brew.sh][Homebrew]]
+- autoconf
+- automake
+- jpeg
+- gnutls
+- texinfo
+- gcc
+- libgccjit
+- pkg-config
+- jansson
+
+
 ** Config Options
 
 [[file:config-options.txt][Config-options.txt]] lists the various options one can use to build emacs.
