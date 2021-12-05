@@ -195,6 +195,17 @@ echo "DONE!"
 
 echo "
 # ======================================================
+# Copy C Source Code
+# ======================================================
+"
+
+# Copy C source files to Emacs
+cp -r ${ROOT_DIR}/${SRC_DIR}/src /Applications/Emacs.app/Contents/Resources/
+
+echo "DONE!"
+
+echo "
+# ======================================================
 # Cleanup
 # ======================================================
 "

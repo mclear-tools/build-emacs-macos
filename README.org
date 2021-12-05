@@ -112,11 +112,12 @@ Emacs history (i.e. Emacs >= 24).
 To *use* the build script simply:
 
 1. Clone this repo.
-2. Make sure that you have cloned the emacs source.
-3. Set the variables in the build script appropriately.
-4. Make the script executable using =chmod u+x build-emacs.sh= and have the
+2. Make sure that you have cloned the emacs source (e.g. =git clone https://github.com/emacs-mirror/emacs.git=).
+3. Get all requirements for build (=chmod u+x ./bemacs-requirements.sh= and =./bemacs-requirements.sh=)
+4. Set the variables in the build script appropriately.
+5. Make the script executable using =chmod u+x build-emacs.sh= and have the
    script in your path.
-5. Run =./build-emacs.sh= (optional: git sha1 or source/branch)
+6. Run =./build-emacs.sh= (optional: git sha1 or source/branch)
 
 ** Build-logs
 
