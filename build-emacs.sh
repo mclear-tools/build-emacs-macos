@@ -50,6 +50,10 @@ fi
 
 git archive --format tar $commit | tar -C ${BUILD_DIR} -xvf -
 
+# ======================================================
+# Set variables for git, time, & patches
+# ======================================================
+
 REV=`git log -n 1 --no-color --pretty='format:%h' ${commit}`
 TIMESTAMP=`git log -n 1 --no-color --pretty='format:%at' ${commit}`
 PATCH_LIST=`find ${ROOT_DIR}/patches/ -name '*.patch'`
@@ -105,7 +109,7 @@ echo "
 # ======================================================
 "
 
-# Generate config files & include versioning info
+# Generate config files
 ./autogen.sh
 
 # ======================================================
@@ -189,7 +193,6 @@ echo "
 # Copy new icon to emacs (currently using a big sur icon)
 # See https://github.com/d12frosted/homebrew-emacs-plus/issues/419
 cp ${ROOT_DIR}/materials/emacs-big-sur.icns /Applications/Emacs.app/Contents/Resources/Emacs.icns
-cp ${ROOT_DIR}/materials/info.plist /Applications/Emacs.app/Contents/Info.plist
 
 echo "DONE!"
 
