@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Install build requirements for emacs
 # Ask for the administrator password upfront.
 sudo -v
@@ -10,9 +12,12 @@ xcode-select --install
 
 # Check for Homebrew,
 # Install if we don't have it
-if test ! $(which brew); then
-  echo "Installing homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew </dev/null 2>&1
+then
+   echo "Installing homebrew..."
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+else
+    echo "Homebrew already installed!"
 fi
 
 # Update homebrew recipes

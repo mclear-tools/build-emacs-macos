@@ -170,19 +170,32 @@ make bootstrap -j$NCPU | tee bootstrap-log.txt || exit 1 && make install -j$NCPU
 
 echo "DONE!"
 
+
 echo "
 # ======================================================
 # Delete old app & Move new app
 # ======================================================
 "
-# close any emacs sessions
+
+# Close any emacs sessions
 pkill -i emacs
-# trash old emacs
-trash /Applications/Emacs.app
-# move build to applications folder
+
+# Remove old emacs
+# See https://stackoverflow.com/a/677212/6277148
+if command -v trash </dev/null 2>&1
+then
+    echo "Trashing old emacs..."
+    trash /Applications/Emacs.app
+else
+    echo "Removing old emacs..."
+    rm -rf /Applications/Emacs.app
+fi
+
+# Move build to applications folder
 mv ${BUILD_DIR}/nextstep/Emacs.app /Applications
 
 echo "DONE!"
+
 
 echo "
 # ======================================================
@@ -207,6 +220,7 @@ cp -r ${ROOT_DIR}/${SRC_DIR}/src /Applications/Emacs.app/Contents/Resources/
 
 echo "DONE!"
 
+
 echo "
 # ======================================================
 # Cleanup
@@ -224,6 +238,7 @@ mv ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-boots
 rm -rf ${BUILD_DIR}
 
 echo "DONE!"
+
 
 echo "
 # ======================================================
