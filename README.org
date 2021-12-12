@@ -89,11 +89,14 @@ or looking at some of the examples[[https://www.thegeekstuff.com/2014/12/patch-c
 patches. If you don't want to use one of the patches below, remove it from the
 =patches= directory or modify the build script. 
 
-- Git version: allows for showing git version in =emacs-version= command
+- Emacs git version: allows for showing git sha1 version of the built emacs in
+  =emacs-version= command
 - Lion fullscreen: allow native fullscreen (especially useful for the new
   "notched" macbooks)
 - No window refocus: better treatment of window focus transfer
-- System appearance: allows for automatic theme switching with macos them change
+- System appearance: allows for automatic theme switching with macos theme
+  change; for an example of how to set it up see the [[file:patches/system-appearance.patch][patch]] or see the
+  description [[https://github.com/d12frosted/homebrew-emacs-plus#system-appearance-change][here]]
 - Windowing: better treatment with window managers; see [[https://github.com/d12frosted/homebrew-emacs-plus/issues/157][here]] for further discussion
 
 ** Build-emacs.sh
@@ -101,7 +104,7 @@ patches. If you don't want to use one of the patches below, remove it from the
 Please note that large portions of the build script are derived from, or
 inspired by:
 
-- https://github.com/renard/emacs-build-macosx (general form)
+- https://github.com/renard/emacs-build-macosx (general structure)
 - https://github.com/d12frosted/homebrew-emacs-plus (patches)
 - https://github.com/jimeh/build-emacs-for-macos (instructions on build and config)
 
@@ -117,7 +120,9 @@ To *use* the build script simply:
 4. Set the variables in the build script appropriately.
 5. Make the script executable using =chmod u+x build-emacs.sh= and have the
    script in your path.
-6. Run =./build-emacs.sh= (optional: git sha1 or source/branch)
+6. Run =./build-emacs.sh= (if you don't want to build from HEAD of the master
+   branch you also need to include either the git sha1 or source/branch from
+   which you are building)
 
 ** Build-logs
 
