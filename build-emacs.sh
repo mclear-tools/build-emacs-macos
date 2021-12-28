@@ -8,6 +8,7 @@
 # Exit on non-zero status
 # See https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
 # ======================================================
+
 set -e
 
 # ======================================================
@@ -17,8 +18,8 @@ set -e
 ROOT_DIR="`pwd`"
 BUILD_DIR=/tmp/emacs-build
 SRC_DIR=emacs-git
-GIT_VERSION=setup-emacs-git-version.el
-SETUP=~/.emacs.d/setup-config
+GIT_VERSION=emacs-git-version.el
+SITELISP=/Applications/Emacs.app/Contents/Resources/site-lisp
 
 # ======================================================
 # Use Homebrew libxml
@@ -61,24 +62,10 @@ cd ${BUILD_DIR}
 
 echo "
 # ======================================================
-# Record Git SHA
-# ======================================================
-"
-
-# This records the Git SHA to an elisp file and
-# moves it to your preferred elisp setup dir
-
-cp ${ROOT_DIR}/materials/${GIT_VERSION} ${BUILD_DIR}/
-sed -e "s/@@GIT_COMMIT@@/$REV/" -i '' ${BUILD_DIR}/${GIT_VERSION}
-mv -f ${BUILD_DIR}/${GIT_VERSION} ${SETUP}/${GIT_VERSION}
-
-echo "DONE!"
-
-echo "
-# ======================================================
 # Apply Patches
 # ======================================================
 "
+
 # Note that this applies all patches in 'patches' dir
 for f in ${PATCH_LIST}; do
     echo "Applying patch `basename $f`"
@@ -196,6 +183,20 @@ mv ${BUILD_DIR}/nextstep/Emacs.app /Applications
 
 echo "DONE!"
 
+echo "
+# ======================================================
+# Record Git SHA
+# ======================================================
+"
+
+# This records the Git SHA to an elisp file and
+# moves it to the site-lisp dir in the emacs build
+
+cp ${ROOT_DIR}/materials/${GIT_VERSION} ${BUILD_DIR}/
+sed -e "s/@@GIT_COMMIT@@/$REV/" -i '' ${BUILD_DIR}/${GIT_VERSION}
+mv -f ${BUILD_DIR}/${GIT_VERSION} ${SITELISP}/${GIT_VERSION}
+
+echo "DONE!"
 
 echo "
 # ======================================================

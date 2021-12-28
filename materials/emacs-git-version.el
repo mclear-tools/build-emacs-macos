@@ -1,13 +1,13 @@
-;;; setup-emacs-git-version.el ---
+;;; emacs-git-version.el ---
 
 ;; Copyright © 2012 Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 
-;; Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
+;; Original Author: Sébastien Gross <seb•ɑƬ•chezwam•ɖɵʈ•org>
 ;; Modified: Colin Mclear
 ;; Keywords: emacs,
 ;; Created: 2012-09-21;
 ;; Last changed: 12-03-2021 14:47:57
-;; Licence: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
+;; License: WTFPL, grab your copy here: http://sam.zoy.org/wtfpl/
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -29,6 +29,6 @@ See both `http://emacswiki.org/emacs/EmacsFromGit' and
 `http://savannah.gnu.org/projects/emacs' for further
 information.")
 
-(provide 'setup-emacs-git-version)
+(provide 'emacs-git-version)
 
-;; setup-emacs-git-version.el ends here
+;; emacs-git-version.el ends here
