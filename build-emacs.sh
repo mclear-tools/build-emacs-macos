@@ -90,6 +90,7 @@ VNUM=`echo $ORIG | sed 's#^AC_INIT(\(.*\))#\1#; s/ //g' | cut -f2 -d,`
 VERS="$DAY Git $REV"
 DESCR="Emacs_Cocoa_${VNUM}_${DAY}_Git_${REV}"
 
+
 echo "
 # ======================================================
 # Autogen/copy_autogen
@@ -133,14 +134,17 @@ echo "
 
 # Here we set config options for emacs
 # For more info see config-options.txt
-
+# Note that this renames ctags in emacs so that it doesn't conflict
+# with other installed ctags; see
+# https://www.topbug.net/blog/2016/11/10/installing-emacs-from-source-avoid-the-conflict-of-ctags/
 ./configure \
     --with-ns \
     --with-native-compilation \
     --with-xwidgets \
     --with-mailutils \
     --with-json \
-    --without-dbus \
+    --with-dbus \
+    --program-transform-name='s/^ctags$/emctags/' \
 
 echo "
 # ======================================================
@@ -156,7 +160,6 @@ NCPU=$(getconf _NPROCESSORS_ONLN)
 make bootstrap -j$NCPU | tee bootstrap-log.txt || exit 1 && make install -j$NCPU | tee build-log.txt
 
 echo "DONE!"
-
 
 echo "
 # ======================================================
@@ -221,6 +224,19 @@ cp -r ${ROOT_DIR}/${SRC_DIR}/src /Applications/Emacs.app/Contents/Resources/
 
 echo "DONE!"
 
+echo "
+# ======================================================
+# Create Log files
+# ======================================================"
+
+# Make a directory for the build's log files and move them there
+# Note that this removes a previous identical dir if making multiple similar builds
+rm -rf ${ROOT_DIR}/build-logs/${DESCR}; mkdir ${ROOT_DIR}/build-logs/${DESCR}
+mv ${BUILD_DIR}/config.log ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-config.log
+mv ${BUILD_DIR}/build-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-build-log.txt
+mv ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-bootstrap-log.txt
+
+echo "DONE!"
 
 echo "
 # ======================================================
@@ -228,18 +244,25 @@ echo "
 # ======================================================
 "
 
-# Make a directory for the build's log files and move them there
-mkdir ${ROOT_DIR}/build-logs/${DESCR}
-mv ${BUILD_DIR}/config.log ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-config.log
-mv ${BUILD_DIR}/build-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-build-log.txt
-mv ${BUILD_DIR}/bootstrap-log.txt ${ROOT_DIR}/build-logs/${DESCR}/${DESCR}-bootstrap-log.txt
-
-# Delete build dir
-
+# Deletebuild dir
 rm -rf ${BUILD_DIR}
 
 echo "DONE!"
 
+echo "
+# ======================================================
+# Add executables to path
+#
+# Be sure to add /Applications/Emacs.app/Contents/MacOS/bin
+# to your .zshrc or .profile path like so:
+# export PATH=\$PATH:/Applications/Emacs.app/Contents/MacOS
+# export PATH=\$PATH:/Applications/Emacs.app/Contents/MacOS/bin
+# ======================================================"
+
+export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
+export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
+
+echo "execs added to this terminal session -- please modify your .zshrc or .profile file accordingly"
 
 echo "
 # ======================================================
@@ -249,4 +272,4 @@ echo "
 
 open /Applications/Emacs.app
 
-echo "DONE!"
+echo "Build script finished!"
