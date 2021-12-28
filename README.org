@@ -29,12 +29,12 @@ there. Hopefully this will be of help to those people who, like myself, want
 more control over how emacs works but lack much of the programming knowledge
 that is assumed for building it.
 
-*Note* that this build process currently works well for me using a 2021 M1
-Macbook Pro with Monterey 12.0.1. It should build either the latest emacs
-release or the master branch just fine. I have not tested this on other
-machines or for other kinds of build. Builds are specific to the machine on
-which they are created, and not guaranteed to work without breakage on other
-machines. 
+*Note* that this build process currently works well for me using a 2021 M1 Macbook
+Pro with Monterey 12.0.1. It should build either the latest emacs release, emacs
+28, or the master branch just fine. I have not tested this on other machines or
+for other kinds of build. Builds are specific to the machine on which they are
+created, and not guaranteed to work without breakage on other machines (no
+dylibs are included though see [[https://imrehorvath.wordpress.com/2021/04/17/wanna-build-gnu-emacs-on-macos-from-source/][here]] if you want something more self-contained).
 
 ** Emacs & Git
 The first thing one needs to do in building emacs from the source files is
@@ -74,11 +74,13 @@ The options I use to build emacs currently are:
 
 #+begin_src bash
 ./configure \
-    --with-json \
-    --with-mailutils \
+    --with-ns \
     --with-native-compilation \
-    --with-ns \ 
     --with-xwidgets \
+    --with-mailutils \
+    --with-json \
+    --with-dbus \ # this is mostly useless on mac but harmless to include
+    --program-transform-name='s/^ctags$/emctags/' \ # avoid ctags namespace conflict
 #+end_src
 
 ** Patches
@@ -123,6 +125,13 @@ To *use* the build script simply:
 6. Run =./build-emacs.sh= (if you don't want to build from HEAD of the master
    branch you also need to include either the git sha1 or source/branch from
    which you are building)
+7. Add emacs and emacsclient to your =PATH= by adding the following to your =.zshrc=
+   or =.profile=:
+
+   #+begin_src sh
+     export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
+     export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
+   #+end_src
 
 ** Build-logs
 
@@ -133,5 +142,5 @@ a set of build logs organized by date and commit.
 
 I've included a big-sur icon by memeplex (from [[https://github.com/d12frosted/homebrew-emacs-plus/issues/419][here]]). There is an info.plist
 to transfer to the emacs build along with it. There is also an elisp file into
-which the emacs build git sha1 will be inscribed and the file copied to your
-preferred location (see the =SETUP= variable in =build-emacs.sh=). 
+which the emacs build git sha1 will be inscribed and the file copied to the
+emacs build's site-lisp (see the =SITELISP= variable in =build-emacs.sh=). 
