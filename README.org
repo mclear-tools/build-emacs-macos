@@ -85,11 +85,13 @@ The options I use to build emacs currently are:
 
 ** Patches
 
-These are various modification to emacs during the build process. You can
-read more about the =patch= command by running =man patch= on the command line
-or looking at some of the examples[[https://www.thegeekstuff.com/2014/12/patch-command-examples/][ here]]. Currently the build script uses all
-patches. If you don't want to use one of the patches below, remove it from the
-=patches= directory or modify the build script. 
+These patches are various modifications applied to emacs during the build
+process. You can read more about the =patch= command by running =man patch= on the
+command line or looking at some of the examples[[https://www.thegeekstuff.com/2014/12/patch-command-examples/][ here]]. Currently the build script
+uses all patches. If you don't want to use one of the patches below, remove it
+from the =patches= directory or modify the build script (e.g by applying the
+patches individually rather than as part of a =for= loop). Here are the patches
+currently included:
 
 - Emacs git version: allows for showing git sha1 version of the built emacs in
   =emacs-version= command
