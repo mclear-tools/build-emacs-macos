@@ -31,10 +31,13 @@ binaries=(
   automake
   gcc
   git
+  giflib
   gnutls
   jansson
   jpeg
   libgccjit
+  libtiff
+  libxml2
   pkg-config
   texinfo
   )

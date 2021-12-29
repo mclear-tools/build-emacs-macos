@@ -128,7 +128,7 @@ To *use* the build script simply:
    branch you also need to include either the git sha1 or source/branch from
    which you are building)
 7. Add emacs and emacsclient to your =PATH= by adding the following to your =.zshrc=
-   or =.profile=:
+   or =.zprofile= (assuming you use zsh):
 
    #+begin_src sh
      export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
