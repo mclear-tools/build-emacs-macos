@@ -20,17 +20,39 @@ BUILD_DIR=/tmp/emacs-build
 SRC_DIR=emacs-git
 GIT_VERSION=emacs-git-version.el
 SITELISP=/Applications/Emacs.app/Contents/Resources/site-lisp
+BREW=$(brew --prefix)
 
+echo "
 # ======================================================
-# Use Homebrew libxml
+# Use Homebrew libxml & image libraries
 # ======================================================
+"
 
-export LDFLAGS="-L/opt/homebrew/opt/libxml2/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/libxml2/include"
+# Check for Homebrew,
+if ! command -v brew </dev/null 2>&1
+then
+   echo "Please install homebrew -- see bemacs-requirements.sh"
+else
+    echo "Homebrew installed!"
+fi
 
+export LDFLAGS="-L${BREW}opt/libxml2/lib -L${BREW}/opt/giflib/lib -L${BREW}/opt/jpeg/lib -L${BREW}/opt/libtiff/lib"
+
+export CPPFLAGS="-I${BREW}/opt/libxml2/include -I${BREW}/opt/jpeg/include -I${BREW}/opt/libtiff/include -I${BREW}/opt/giflib/include"
+
+echo "
+# ======================================================
+# Use Homebrew libxml pkgconfig
+# ======================================================
+"
+
+export PKG_CONFIG_PATH="${BREW}/opt/libxml2/lib/pkgconfig"
+
+echo "
 # ======================================================
 # Start with a clean build
 # ======================================================
+"
 
 rm -rf ${BUILD_DIR}
 mkdir ${BUILD_DIR}
@@ -90,7 +112,6 @@ VNUM=`echo $ORIG | sed 's#^AC_INIT(\(.*\))#\1#; s/ //g' | cut -f2 -d,`
 VERS="$DAY Git $REV"
 DESCR="Emacs_Cocoa_${VNUM}_${DAY}_Git_${REV}"
 
-
 echo "
 # ======================================================
 # Autogen/copy_autogen
@@ -101,19 +122,13 @@ echo "
 ./autogen.sh
 
 # ======================================================
-# Use Homebrew libxml pkgconfig
-# ======================================================
-
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libxml2/lib/pkgconfig"
-
-# ======================================================
 # Set Compile Flags
 # ======================================================
 
 # Use Clang for slightly faster builds
 # See https://leeifrankjaw.github.io/articles/clang_vs_gcc_for_emacs.html
 # See https://alibabatech.medium.com/gcc-vs-clang-llvm-an-in-depth-comparison-of-c-c-compilers-899ede2be378
-
+# See https://docs.oracle.com/cd/E19957-01/806-3567/cc_options.html for CFLAG option explanations
 CFLAGS="-g -O2"
 export CC=clang
 export OBJC=clang
@@ -143,7 +158,7 @@ echo "
     --with-xwidgets \
     --with-mailutils \
     --with-json \
-    --with-dbus \
+    --without-dbus \
     --program-transform-name='s/^ctags$/emctags/' \
 
 echo "
@@ -172,13 +187,19 @@ pkill -i emacs
 
 # Remove old emacs
 # See https://stackoverflow.com/a/677212/6277148
-if command -v trash </dev/null 2>&1
+# and https://stackoverflow.com/a/638980/6277148
+# for discussion of confitional checks for files
+
+if [ -e /Applications/Emacs.app ]
 then
+   if command -v trash </dev/null 2>&1
+   then
     echo "Trashing old emacs..."
     trash /Applications/Emacs.app
-else
+   else
     echo "Removing old emacs..."
     rm -rf /Applications/Emacs.app
+   fi
 fi
 
 # Move build to applications folder
@@ -262,7 +283,8 @@ echo "
 export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
 export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
 
-echo "execs added to this terminal session -- please modify your .zshrc or .profile file accordingly"
+echo "execs added to this terminal session -- please
+modify your .zshrc or .zprofile file accordingly"
 
 echo "
 # ======================================================
