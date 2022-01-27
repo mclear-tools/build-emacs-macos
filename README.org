@@ -79,6 +79,7 @@ The options I use to build emacs currently are:
     --with-xwidgets \
     --with-mailutils \
     --with-json \
+    --without-compress-install \  # don't compress things like help & info files
     --with-dbus \ # this is mostly useless on mac but harmless to include
     --program-transform-name='s/^ctags$/emctags/' \ # avoid ctags namespace conflict
 #+end_src

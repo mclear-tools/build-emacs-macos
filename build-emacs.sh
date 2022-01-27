@@ -5,11 +5,12 @@
 ## See also https://github.com/jimeh/build-emacs-for-macos
 
 # ======================================================
-# Exit on non-zero status
+# Uncomment `set -e' if you want script to exit
+# on non-zero status
 # See https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
 # ======================================================
 
-set -e
+# set -e
 
 # ======================================================
 # Set Variables
@@ -147,10 +148,9 @@ echo "
 # ======================================================
 "
 
-# Here we set config options for emacs
-# For more info see config-options.txt
-# Note that this renames ctags in emacs so that it doesn't conflict
-# with other installed ctags; see
+# Here we set config options for emacs For more info see config-options.txt.
+# Note that this renames ctags in emacs so that it doesn't conflict with other
+# installed ctags; see and don't compress info files, etc
 # https://www.topbug.net/blog/2016/11/10/installing-emacs-from-source-avoid-the-conflict-of-ctags/
 ./configure \
     --with-ns \
@@ -159,6 +159,7 @@ echo "
     --with-mailutils \
     --with-json \
     --without-dbus \
+    --without-compress-install \
     --program-transform-name='s/^ctags$/emctags/' \
 
 echo "
