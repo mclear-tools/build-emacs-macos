@@ -266,7 +266,7 @@ echo "
 # ======================================================
 "
 
-# Deletebuild dir
+# Delete build dir
 rm -rf ${BUILD_DIR}
 
 echo "DONE!"

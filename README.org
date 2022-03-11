@@ -136,6 +136,10 @@ To *use* the build script simply:
      export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
    #+end_src
 
+If you're wondering whether the most recent commit on =master= is stable, you
+might check out [[https://github.com/jimeh/homebrew-emacs-builds/blob/main/Casks/emacs-app-good.rb][jimeh's]] "good-version" of emacs-main to see which git sha points
+to a stable commit.
+
 ** Build-logs
 
 Each build with =build-emacs.sh= generates a subdirectory in =build-logs= with
