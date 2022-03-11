@@ -132,8 +132,8 @@ To *use* the build script simply:
    or =.zprofile= (assuming you use zsh):
 
    #+begin_src sh
-     export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
-     export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
+export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
+export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
    #+end_src
 
 If you're wondering whether the most recent commit on =master= is stable, you
