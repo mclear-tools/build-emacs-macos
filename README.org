@@ -137,8 +137,9 @@ export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
    #+end_src
 
 If you're wondering whether the most recent commit on =master= is stable, you
-might check out [[https://github.com/jimeh/homebrew-emacs-builds/blob/main/Casks/emacs-app-good.rb][jimeh's]] "good-version" of emacs-main to see which git sha points
-to a stable commit.
+might check out [[https://github.com/jimeh/emacs-builds/issues/7][jimeh's]]
+"good-version" list of emacs-main versions to see which git sha points to a
+stable commit.
 
 ** Build-logs
 
