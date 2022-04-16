@@ -37,7 +37,7 @@ else
     echo "Homebrew installed!"
 fi
 
-export LDFLAGS="-L${BREW}opt/libxml2/lib -L${BREW}/opt/giflib/lib -L${BREW}/opt/jpeg/lib -L${BREW}/opt/libtiff/lib"
+export LDFLAGS="-L${BREW}/opt/libxml2/lib -L${BREW}/opt/giflib/lib -L${BREW}/opt/webp/lib -L${BREW}/opt/jpeg/lib -L${BREW}/opt/libtiff/lib"
 
 export CPPFLAGS="-I${BREW}/opt/libxml2/include -I${BREW}/opt/jpeg/include -I${BREW}/opt/libtiff/include -I${BREW}/opt/giflib/include"
 
