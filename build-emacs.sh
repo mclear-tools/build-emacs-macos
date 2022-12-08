@@ -249,7 +249,8 @@ echo "DONE!"
 echo "
 # ======================================================
 # Create Log files
-# ======================================================"
+# ======================================================
+"
 
 # Make a directory for the build's log files and move them there
 # Note that this removes a previous identical dir if making multiple similar builds
@@ -279,7 +280,8 @@ echo "
 # to your .zshrc or .profile path like so:
 # export PATH=\$PATH:/Applications/Emacs.app/Contents/MacOS
 # export PATH=\$PATH:/Applications/Emacs.app/Contents/MacOS/bin
-# ======================================================"
+# ======================================================
+"
 
 export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS
 export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
