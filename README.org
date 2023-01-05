@@ -85,7 +85,7 @@ The options I use to build emacs currently are:
     --program-transform-name='s/^ctags$/emctags/' \ # avoid ctags namespace conflict
 #+end_src
 
-Depending on what version you're building you might also want to add =--with-treesitter= or other new options with emacs 29. For info consult [[https://github.com/emacs-mirror/emacs/blob/master/etc/NEWS.29][Emacs 29 News.]]
+Depending on what version you're building you might also want to add =--with-treesitter= or other options new with emacs 29. For info consult [[https://github.com/emacs-mirror/emacs/blob/master/etc/NEWS.29][Emacs 29 News.]]
 
 ** Patches
 
