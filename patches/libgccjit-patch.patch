@@ -3,6 +3,8 @@ From: Boris Buliga <boris@d12frosted.io>
 Date: Tue, 9 Aug 2022 09:17:27 +0300
 Subject: [PATCH] fix MAC_LIBS inference after gcc 12 release
 
+NOTE: this patch is no longer needed for Emacs 30+; see issue #5
+
 ---
  configure.ac | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
