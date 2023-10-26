@@ -1,3 +1,5 @@
+#+html: <a href="https://www.buymeacoffee.com/fxpy8fzgyxg" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 23px !important;width: 120pfull-body portrait, watercolor and ink, realistic yet ethereal, dungeons and dragons, meticulous detail, watercolor wash background !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
 Here you'll find a shell script for building emacs on macos, along with a few
 other useful bits.
 
